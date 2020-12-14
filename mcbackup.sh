@@ -8,19 +8,21 @@ cd $SRCDIR
 
 #Loop through directories in SRCDIR
 for dir in */; do\
-    
+
     #Remove trailing / in dir
     dir=${dir%*/}
     echo "$dir"
 
     FILENAME=$dir-$TIME.tar.gz
     DESDIR=/media/shared/mc-backups/$dir
-    
+
     #Ensure DESDIR exists
     mkdir $DESDIR
 
     #Backup server files
     tar -cpzf $DESDIR/$FILENAME -C $SRCDIR $dir 
+
+    #TODO IF ONLY 2 BACKUPS DO NOT REMOVE
 
     #Remove backups older than 7 days
     find $DESDIR/$dir-*.tar.gz -type f -mtime +7 -delete
