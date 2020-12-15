@@ -22,8 +22,10 @@ for dir in */; do\
     #Backup server files
     tar -cpzf $DESDIR/$FILENAME -C $SRCDIR $dir 
 
-    #TODO IF ONLY 2 BACKUPS DO NOT REMOVE
-
-    #Remove backups older than 7 days
-    find $DESDIR/$dir-*.tar.gz -type f -mtime +7 -delete
+    #Only remove old backups if more than 2 exist
+    if [find $DESDIR/$dir-*.tar.gz -type f | wc -l -gt 2]
+    then
+      #Remove backups older than 7 days
+      find $DESDIR/$dir-*.tar.gz -type f -mtime +7 -delete
+    fi
 done
