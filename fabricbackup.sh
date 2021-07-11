@@ -13,15 +13,15 @@ cd /home/lab/docker/bungee/data
     #dir=${dir%*/}
     #echo "$dir"
 
-    FILENAME=fabric-$TIME.tar.gz
+    FILENAME=fabric-$TIME-H.tar.gz
     DESDIR=/media/shared/mc-backups/fabric-fastbackups/
 
     #Ensure DESDIR exists
-    #mkdir $DESDIR
+    mkdir $DESDIR
 
     #Backup server files
     tar -cpzf $DESDIR/$FILENAME fabric/ 
 
-    #Remove backups older than 7 days
-    #find $DESDIR/$dir-*.tar.gz -type f -mtime +7 -delete
+    #Remove backups older than 3 days
+    find $DESDIR/fabric-*.tar.gz -type f -mtime +3 -delete
 #done

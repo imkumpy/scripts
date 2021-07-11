@@ -63,6 +63,12 @@ for dir in */; do\
     # Backup the files using tar.
     tar czf $dest/$archive_file $backup_files
 
+    # Backup week files to S3
+    if [ $archive_file == $week_file ]; then
+	/usr/local/bin/aws s3 cp $dest/$archive_file s3://kumpdev-mcbackups/
+	echo "Backed up files to S3"
+    fi
+
     # Print end status message.
     echo
     echo "Backup finished"
